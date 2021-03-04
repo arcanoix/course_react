@@ -14,13 +14,9 @@ const CounterApp = ( { value = 10 }) => {
         // setCounter( (c) => c + 1);
     }
 
-    const handleMinus = () => {
-        setCounter( counter - 1);
-    }
-
-    const handleReset = () => {
-        setCounter( value );
-    }
+    const handleMinus = () => setCounter( counter - 1);
+    const handleReset = () => setCounter( value );
+    
 
 
     return (
