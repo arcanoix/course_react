@@ -1,36 +1,24 @@
-import React, { useEffect , useState} from 'react'
+import React from 'react'
+import { useFetchGifs } from '../hooks/useFetchGifs'
+//import { getGif } from '../helpers/getGifs';
 import { GifGridItem } from './GifGridItem';
 
 export const GifGrid = ({ category }) => {
 
-    const [images, setImages] = useState([]);
+    const {data:images, loading} = useFetchGifs( category );
+
+    /* const [images, setImages] = useState([]);
 
     useEffect( () => {
-        getGif();
-    },  []);
-
-    const getGif = async () => {
-        const url = 'https://api.giphy.com/v1/gifs/search?q=naruto&limit=10&api_key=lDmzw4UCn9sCDmgzDlQbebsHJdfD9Es0';
-
-        const resp = await fetch( url );
-        const {data} = await resp.json();
-
-        const gifs = data.map( img => {
-            return {
-                id: img.id,
-                title: img.title,
-                url: img.images?.downsized_medium.url
-            }
-        })
-        console.log(gifs);
-        setImages(gifs);
-    }
+        getGif( category )
+            .then( imgs => setImages( imgs ) );
+    },  [ category ]); */
 
     return (
         <div>
                 <h3>{  category }</h3>
-                
-                <ol>
+                { loading &&  <p>Loading</p>}
+                 <ol>
                     {
                         images.map( img  => (
                                <GifGridItem 
@@ -39,7 +27,7 @@ export const GifGrid = ({ category }) => {
                                />
                         ))
                     }
-                </ol>
+                </ol> 
         </div>
     )
 }
